@@ -61,9 +61,6 @@ const Product = () => {
     }
   }
 
-  useEffect(() => {
-    console.log(carrito)
-  },[carrito])
 
   return (
     <div className='contenedor-card'>
