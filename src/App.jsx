@@ -30,11 +30,17 @@ useEffect(() => {
     }
     {
       isError &&
-        <Error />
+        <Error 
+        setIsProduct={setIsProduct}
+        setIsError={setIsError}
+        />
     }
     {
       isSucces &&
-        <Success />
+        <Success 
+        setIsProduct={setIsProduct}
+        setIsSuccess={setIsSuccess}
+        />
     }
     </>
   )
