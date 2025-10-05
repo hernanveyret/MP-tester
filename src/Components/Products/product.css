@@ -1,0 +1,97 @@
+/* Centra el contenedor en la pantalla */
+.contenedor-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f6f8;
+}
+
+/* Contenedor de la card */
+.card-product {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilo de la card individual */
+.card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  width: 280px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin: 5px;
+}
+
+/* Efecto hover */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Imagen del producto */
+.card img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  object-fit: cover;
+}
+
+/* Nombre del producto */
+.card h3 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+/* Precio */
+.card p {
+  font-size: 1.1rem;
+  color: #27ae60;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+/* Botón comprar */
+.btn-producto {
+  background-color: #27ae60;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease;
+}
+
+.btn-producto:hover {
+  background-color: #219150;
+}
+.card-carrito {
+  display: flex;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #f5f6f8;
+  padding: 10px;
+  margin-top: 10px;
+}
+.card-carrito p {
+  color: black;
+}
+.btn-carrito {
+  background-color: #3483FA;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease;
+  margin-top: 10px;
+}
+.btn-carrito:hover{
+  background-color: hsl(216, 65%, 50%);
+}

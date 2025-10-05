@@ -1,0 +1,142 @@
+import React, { useState, useEffect } from 'react';
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
+import axios from 'axios'
+
+// public key
+// APP_USR-667e7b7b-4988-4240-afa8-45b108b5ae71
+
+// access token
+// APP_USR-5422824642873792-093011-058d567dcfb7abf264f395a32eb5b2ee-2717435635
+
+// tarjetas de prueba
+/* Mastercard
+5031 7557 3453 0604
+123
+11/30
+*/
+
+
+
+
+import './product.css'
+
+const Product = () => {
+  const [ preferenceId, setPreferenceId ] = useState(null);
+  const [ carrito, setCarrito ] = useState([])
+
+  const publicKey = import.meta.env.VITE_MP_PUBLIC_KEY;
+
+  const productos = [
+    {
+      id: 1,
+      title: 'Remera reflex Huntrix',
+      unit_price: 100,
+      quantity: 1
+    },
+    {
+      id: 2,
+      title: 'Remera reflex Roblox',
+      unit_price: 110,
+      quantity: 1
+    }
+  ]
+  
+  // Inicializa Mercado Pago con tu Public Key
+  initMercadoPago(publicKey, {
+    locale: 'es-AR' // para que quede en español argentino
+  });
+
+  const createPreference = async () => {
+    console.log('click 2')
+    console.log(typeof carrito[0].unit_price, carrito[0].unit_price)
+    try {
+      const response = await axios.post('http://localhost:3000/create_preference', {
+      items: carrito.length > 0 && carrito
+        
+      });
+
+      const { id } = response.data;
+      return id;
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleBuy = async () => {
+    console.log('click')
+    const id = await createPreference();
+    if(id){
+      setPreferenceId(id)
+    }
+  }
+
+  const addCarrito = (id) => {    
+    const filtro = productos.find(pro => pro.id === id)
+    console.log(filtro)
+    if(id){
+      setCarrito((prevCarrito) => [ ...prevCarrito, filtro ])
+    }
+  }
+
+  useEffect(() => {
+    console.log(carrito)
+  },[carrito])
+
+  return (
+    <div className='contenedor-card'>
+      <div className='card-product'>
+        <div className='card'>
+          <img src="./img/remera1.jpg" alt="imagen remera" />
+          <h3>Remera reflex Huntrix</h3>
+          <p>$ 100</p>
+          <button
+            className='btn-producto'
+            onClick={() => { addCarrito(1)}}
+          >Agregar Al Carrito</button>          
+        </div>
+      </div>
+
+      <div className='card-product'>
+        <div className='card'>
+          <img src="./img/remera4.jpg" alt="imagen remera" />
+          <h3>Remera reflex Roblox</h3>
+          <p>$ 110</p>
+          <button
+          className='btn-producto'        
+            onClick={() => { addCarrito(2)}}
+          >Agregar Al Carrito</button>          
+        </div>
+      </div>
+          
+          {
+            carrito.length > 0 &&
+            <div className='card'>
+              <h3>Tus Productos</h3>
+              
+                {
+                  carrito.map((p,i) => (
+                    <div key={i} className="card-carrito">
+                      <p>{p.title}</p>
+                      <div className="precio-carrito">
+                        <p>Cant: {p.quantity}</p>
+                        <p>{p.unit_price.toLocaleString('es-AR', { style: 'currency', currency: 'ARS' })}</p>
+                      </div>
+                    </div>
+                  ))
+                }
+                <button
+                  className='btn-carrito'
+                  onClick={handleBuy}
+                >PAGAR</button>
+          {
+            preferenceId && 
+            <Wallet initialization={{ preferenceId: preferenceId }} />
+          }
+              
+            </div>
+          }
+          
+    </div>
+  )
+ }
+ export default Product;
