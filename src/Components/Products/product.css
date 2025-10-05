@@ -95,3 +95,9 @@
 .btn-carrito:hover{
   background-color: hsl(216, 65%, 50%);
 }
+
+@media (max-width: 480px) {
+  .contenedor-card {
+    flex-wrap: wrap;
+  }
+}
