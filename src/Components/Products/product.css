@@ -7,6 +7,23 @@
   background-color: #f5f6f8;
 }
 
+.btn-up {
+  position: fixed;
+  bottom: 20px;
+  right: 10px;
+  background-color: #3483FA;
+  padding: 5px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform .2s ease-in-out;
+  display: none;
+}
+.btn-up:hover {
+  background-color: #1b73f7;
+  transform: scale(1.1);
+}
+
 /* Contenedor de la card */
 .card-product {
   display: flex;
@@ -99,5 +116,8 @@
 @media (max-width: 480px) {
   .contenedor-card {
     flex-wrap: wrap;
+  }
+  .btn-up {
+    display: block;
   }
 }

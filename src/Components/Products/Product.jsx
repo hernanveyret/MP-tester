@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import axios from 'axios'
 import './product.css'
 
 const Product = () => {
   const [ preferenceId, setPreferenceId ] = useState(null);
-  const [ carrito, setCarrito ] = useState([])
-
+  const [ carrito, setCarrito ] = useState([]);
+  const miRefScroll = useRef();
   const publicKey = import.meta.env.VITE_MP_PUBLIC_KEY;
 
   const productos = [
@@ -30,8 +30,8 @@ const Product = () => {
   });
 
   const createPreference = async () => {
-    console.log('click 2')
-    console.log(typeof carrito[0].unit_price, carrito[0].unit_price)
+    //console.log('click 2')
+    //console.log(typeof carrito[0].unit_price, carrito[0].unit_price)
     try {
       const response = await axios.post('https://mp-server-tester.onrender.com/create_preference', {
       items: carrito.length > 0 && carrito
@@ -46,7 +46,7 @@ const Product = () => {
   }
 
   const handleBuy = async () => {
-    console.log('click')
+    //console.log('click')
     const id = await createPreference();
     if(id){
       setPreferenceId(id)
@@ -55,15 +55,19 @@ const Product = () => {
 
   const addCarrito = (id) => {    
     const filtro = productos.find(pro => pro.id === id)
-    console.log(filtro)
+    //console.log(filtro)
     if(id){
       setCarrito((prevCarrito) => [ ...prevCarrito, filtro ])
     }
   }
 
+ const manejarScrollArriba = () => {
+    miRefScroll.current?.scrollIntoView({behavior:'smooth'})
+  }
 
   return (
     <div className='contenedor-card'>
+      <h1 ref={miRefScroll}>PRODUCTOS</h1>
       <div className='card-product'>
         <div className='card'>
           <img src="./img/remera1.jpg" alt="imagen remera" />
@@ -115,7 +119,18 @@ const Product = () => {
               
             </div>
           }
-          
+          <button
+            className='btn-up'
+            onClick={manejarScrollArriba}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" 
+            height="24px" 
+            viewBox="0 -960 960 960" 
+            width="24px" 
+            fill="#eee">
+              <path d="M440-160v-487L216-423l-56-57 320-320 320 320-56 57-224-224v487h-80Z"/>
+            </svg>
+          </button>
     </div>
   )
  }
