@@ -2,18 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import axios from 'axios'
 
-// public key
-// APP_USR-667e7b7b-4988-4240-afa8-45b108b5ae71
-
-// access token
-// APP_USR-5422824642873792-093011-058d567dcfb7abf264f395a32eb5b2ee-2717435635
-
-// tarjetas de prueba
-/* Mastercard
-5031 7557 3453 0604
-123
-11/30
-*/
 
 
 
