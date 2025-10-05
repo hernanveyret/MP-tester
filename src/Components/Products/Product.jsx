@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import axios from 'axios'
-
-
-
-
-
 import './product.css'
 
 const Product = () => {
@@ -18,13 +13,13 @@ const Product = () => {
     {
       id: 1,
       title: 'Remera reflex Huntrix',
-      unit_price: 100,
+      unit_price: 20,
       quantity: 1
     },
     {
       id: 2,
       title: 'Remera reflex Roblox',
-      unit_price: 110,
+      unit_price: 10,
       quantity: 1
     }
   ]
@@ -38,7 +33,7 @@ const Product = () => {
     console.log('click 2')
     console.log(typeof carrito[0].unit_price, carrito[0].unit_price)
     try {
-      const response = await axios.post('http://localhost:3000/create_preference', {
+      const response = await axios.post('https://mp-server-tester.onrender.com/create_preference', {
       items: carrito.length > 0 && carrito
         
       });
@@ -76,7 +71,7 @@ const Product = () => {
         <div className='card'>
           <img src="./img/remera1.jpg" alt="imagen remera" />
           <h3>Remera reflex Huntrix</h3>
-          <p>$ 100</p>
+          <p>$ 20</p>
           <button
             className='btn-producto'
             onClick={() => { addCarrito(1)}}
@@ -88,7 +83,7 @@ const Product = () => {
         <div className='card'>
           <img src="./img/remera4.jpg" alt="imagen remera" />
           <h3>Remera reflex Roblox</h3>
-          <p>$ 110</p>
+          <p>$ 10</p>
           <button
           className='btn-producto'        
             onClick={() => { addCarrito(2)}}
